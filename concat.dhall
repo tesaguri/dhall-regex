@@ -18,6 +18,23 @@ let concat
       \(Regex : Type) ->
       \(visitor : Visitor Regex) ->
         visitor.concat
-          (List/map Regex@1 Regex (\(expr : Regex@1) -> expr Regex visitor) x)
+          ( List/map
+              Regex@1
+              Regex
+              ( \(expr : Regex@1) ->
+                  expr
+                    Regex
+                    ( visitor
+                      with alternation =
+                          ( \(xs : List Regex) ->
+                              visitor.group
+                                { kind = GroupKind.NonCapturing ([] : List Flag)
+                                , expr = visitor.alternation xs
+                                }
+                          )
+                    )
+              )
+              x
+          )
 
 in  concat

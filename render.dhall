@@ -115,4 +115,19 @@ let example1 =
 
       in  assert : render ast === "https://example\\.com/\\?q=foo\\+bar"
 
+let example2 =
+    -- The `Regex.concat` and `Regex.repetition` constructors insert non-capturing groups
+    -- when operator precedence is ambiguous.
+      let ast =
+            Regex.concat
+              [ Regex.alternation [ Regex.literal "foo", Regex.literal "bar" ]
+              , Regex.repetition
+                  { kind = Regex.RepetitionKind.ZeroOrOne
+                  , greedy = True
+                  , expr = Regex.literal "baz"
+                  }
+              ]
+
+      in  assert : render ast === "(?:foo|bar)(?:baz)?"
+
 in  render
