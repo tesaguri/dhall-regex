@@ -74,9 +74,30 @@ let GroupKind/show
 
 let escape
     : Text -> Text
-    = List/fold
+    =
+      -- Reference: <https://docs.rs/regex-syntax/0.6.25/regex_syntax/fn.is_meta_character.html>
+      -- `"\\"` must be the final element. Otherwise, it would result in double-escaping.
+      List/fold
         Text
-        [ ".", "*", "+", "?", "(", ")", "[", "]", "\\" ]
+        [ "."
+        , "+"
+        , "*"
+        , "?"
+        , "("
+        , ")"
+        , ","
+        , "["
+        , "]"
+        , "{"
+        , "}"
+        , "^"
+        , "\$"
+        , "#"
+        , "&"
+        , "-"
+        , "~"
+        , "\\"
+        ]
         Text
         (\(char : Text) -> Text/replace char "\\${char}")
 
