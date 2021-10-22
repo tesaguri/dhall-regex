@@ -1,0 +1,14 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dhall-lang/setup-dhall@v4
+      - run: dhall format --check --transitive package.dhall
+      - run: dhall freeze --all --check --transitive package.dhall
+      - run: dhall type --file package.dhall --quiet
