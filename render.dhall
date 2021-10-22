@@ -10,7 +10,9 @@ let Text/concat =
       https://prelude.dhall-lang.org/v21.0.0/Text/concat.dhall
         sha256:731265b0288e8a905ecff95c97333ee2db614c39d69f1514cb8eed9259745fc0
 
-let Regex = ./core.dhall
+let Regex =
+      ./core.dhall
+        sha256:68e1dfc5faab7573d465aea9fd8c59cd32a2cc799ccf1bc3d59d728654ee87e6
 
 let Flag/show
     : Regex.Flag -> Text
