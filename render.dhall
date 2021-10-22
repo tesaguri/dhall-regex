@@ -144,11 +144,7 @@ let example2 =
       let ast =
             Regex.concat
               [ Regex.alternation [ Regex.literal "foo", Regex.literal "bar" ]
-              , Regex.repetition
-                  { kind = Regex.RepetitionKind.ZeroOrOne
-                  , greedy = True
-                  , expr = Regex.literal "baz"
-                  }
+              , Regex.optional (Regex.literal "baz")
               ]
 
       in  assert : render ast === "(?:foo|bar)(?:baz)?"
