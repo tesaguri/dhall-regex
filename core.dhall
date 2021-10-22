@@ -14,7 +14,15 @@
 , assertion = ./assertion.dhall
 , class = ./class.dhall
 , repetition = ./repetition.dhall
+, optional = ./optional.dhall
+, multi = ./multi.dhall
+, nonZero = ./nonZero.dhall
+, exactly = ./exactly.dhall
+, atLeast = ./atLeast.dhall
+, bounded = ./bounded.dhall
 , group = ./group.dhall
+, capture = ./capture.dhall
+, captureAs = ./captureAs.dhall
 , alternation = ./alternation.dhall
 , concat = ./concat.dhall
 }
