@@ -1,14 +1,14 @@
 let Regex =
       ./Type.dhall
-        sha256:f339404b3d7e4a112ceb9533482b4941c41b6ec9ae28840c913ee1983ac2a60c
+        sha256:b767421fdb047ab22540b332eada0e822bc3361e05ae3e46572554ad9d2cbaa8
 
 let Visitor =
       ./Visitor.dhall
-        sha256:f20605cfa3964e442fea3c091ca8c09a913103d093db56db43d7a815a206ca5e
+        sha256:52ace10065c920658b29972adb042c6b5281054af22968436ff5cef78c9989ab
 
 let Class =
       ./ClassType.dhall
-        sha256:1b57497be16d9ad805d9bf729f3acd93371437bac63aeb41cf6cb0a318727035
+        sha256:8dbd3ead5090c8870045aa9c1912206620303c82f4a20495aef293af4fe8c364
 
 let class
     : Class -> Regex

@@ -12,7 +12,7 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:68e1dfc5faab7573d465aea9fd8c59cd32a2cc799ccf1bc3d59d728654ee87e6
+        sha256:96286b801b292df797d16aae42aa7ca6373066d7f60fe13b782cc457aac58894
 
 let Flag/show
     : Regex.Flag -> Text
@@ -43,9 +43,25 @@ let Assertion/show
 
 let Class/show
     : Regex.Class -> Text
-    =
-      -- TODO
-      \(class : Regex.Class) -> merge {=} class : Text
+    = \(class : Regex.Class) ->
+        merge
+          { Unicode =
+              -- TODO
+              \(x : Regex.ClassUnicode) -> merge {=} x : Text
+          , Perl =
+              \(x : Regex.ClassPerl) ->
+                if    x.negated
+                then  merge
+                        { Digit = "\\D", Space = "\\S", Word = "\\W" }
+                        x.kind
+                else  merge
+                        { Digit = "\\d", Space = "\\s", Word = "\\w" }
+                        x.kind
+          , Bracketed =
+              -- TODO
+              \(x : Regex.ClassBracketed) -> merge {=} x : Text
+          }
+          class
 
 let RepetitionKind/show
     : Regex.RepetitionKind -> Text
