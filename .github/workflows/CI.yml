@@ -11,4 +11,5 @@ jobs:
       - uses: dhall-lang/setup-dhall@v4
       - run: dhall format --check --transitive package.dhall
       - run: dhall freeze --all --check --transitive package.dhall
+      - run: dhall lint --check *.dhall
       - run: dhall type --file package.dhall --quiet

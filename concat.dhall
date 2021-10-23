@@ -1,5 +1,5 @@
 let List/map =
-      https://prelude.dhall-lang.org/v21.0.0/List/map
+      https://prelude.dhall-lang.org/v21.0.0/List/map.dhall
         sha256:dd845ffb4568d40327f2a817eb42d1c6138b929ca758d50bc33112ef3c885680
 
 let Regex =
@@ -13,10 +13,6 @@ let Visitor =
 let Flag =
       ./Flag.dhall
         sha256:0264af3ae814901e53d13075789c1c6d745909e4701e17b898564a0e3e84439a
-
-let Group =
-      ./GroupType.dhall
-        sha256:0f262c2f20c4398ca7225db3c8571135e37cfce10b1a7f74f66977f8e28ea644
 
 let GroupKind =
       ./GroupKind.dhall
