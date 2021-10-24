@@ -12,7 +12,36 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:96286b801b292df797d16aae42aa7ca6373066d7f60fe13b782cc457aac58894
+        sha256:ac81e4d617499836f8d03fdd917f74726b3b3851af1a967a1a1e79baa5198cf7
+
+let escape
+    : Text -> Text
+    =
+      -- Reference: <https://docs.rs/regex-syntax/0.6.25/regex_syntax/fn.is_meta_character.html>
+      -- `"\\"` must be the final element. Otherwise, it would result in double-escaping.
+      List/fold
+        Text
+        [ "."
+        , "+"
+        , "*"
+        , "?"
+        , "("
+        , ")"
+        , ","
+        , "["
+        , "]"
+        , "{"
+        , "}"
+        , "^"
+        , "\$"
+        , "#"
+        , "&"
+        , "-"
+        , "~"
+        , "\\"
+        ]
+        Text
+        (\(char : Text) -> Text/replace char "\\${char}")
 
 let Flag/show
     : Regex.Flag -> Text
@@ -43,8 +72,36 @@ let Assertion/show
 
 let ClassUnicode/show
     : Regex.ClassUnicode -> Text
-    = -- TODO
-      \(x : Regex.ClassUnicode) -> merge {=} x : Text
+    = \(x : Regex.ClassUnicode) ->
+        let p = if x.negated then "P" else "p"
+
+        let body =
+              merge
+                { OneLetter =
+                    \(x : Regex.ClassUnicodeOneLetter) ->
+                      merge
+                        { Letter = "L"
+                        , Punctuation = "P"
+                        , Symbol = "S"
+                        , Mark = "M"
+                        , Number = "N"
+                        , Separator = "Z"
+                        , Other = "C"
+                        }
+                        x
+                , Named = \(x : Text) -> "{${escape x}}"
+                , NamedValue =
+                    \(x : Regex.ClassUnicodeNamedValue) ->
+                      let op =
+                            merge
+                              { Equal = "=", Colon = ":", NotEqual = "!=" }
+                              x.op
+
+                      in  "{${escape x.name}${op}${escape x.value}}"
+                }
+                x.kind
+
+        in  "\\${p}${body}"
 
 let ClassPerl/show
     : Regex.ClassPerl -> Text
@@ -94,35 +151,6 @@ let GroupKind/show
                 "?${Text/concat (List/map Regex.Flag Text Flag/show flags)}:"
           }
           kind
-
-let escape
-    : Text -> Text
-    =
-      -- Reference: <https://docs.rs/regex-syntax/0.6.25/regex_syntax/fn.is_meta_character.html>
-      -- `"\\"` must be the final element. Otherwise, it would result in double-escaping.
-      List/fold
-        Text
-        [ "."
-        , "+"
-        , "*"
-        , "?"
-        , "("
-        , ")"
-        , ","
-        , "["
-        , "]"
-        , "{"
-        , "}"
-        , "^"
-        , "\$"
-        , "#"
-        , "&"
-        , "-"
-        , "~"
-        , "\\"
-        ]
-        Text
-        (\(char : Text) -> Text/replace char "\\${char}")
 
 let render
     : Regex.Type -> Text

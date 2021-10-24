@@ -8,7 +8,7 @@ let Assertion =
 
 let Class =
       ./ClassType.dhall
-        sha256:8dbd3ead5090c8870045aa9c1912206620303c82f4a20495aef293af4fe8c364
+        sha256:755ec5680e139a89af59658e28dada8455a2173c1992d5ccdbd972d2e3eb4274
 
 let Repetition =
       ./RepetitionType.dhall

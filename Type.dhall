@@ -1,6 +1,6 @@
 let Visitor =
       ./Visitor.dhall
-        sha256:52ace10065c920658b29972adb042c6b5281054af22968436ff5cef78c9989ab
+        sha256:0b8e712a07af019150944db041a61a65d399f743c18e91491595d1d3bce3e06b
 
 let Regex
     : Type

@@ -1,10 +1,10 @@
 let Regex =
       ./Type.dhall
-        sha256:b767421fdb047ab22540b332eada0e822bc3361e05ae3e46572554ad9d2cbaa8
+        sha256:334439f6154ad39c69e4161a595fcf3ad8757c67f63445455d9e6e67e79a9ca6
 
 let Visitor =
       ./Visitor.dhall
-        sha256:52ace10065c920658b29972adb042c6b5281054af22968436ff5cef78c9989ab
+        sha256:0b8e712a07af019150944db041a61a65d399f743c18e91491595d1d3bce3e06b
 
 let GroupKind =
       ./GroupKind.dhall
