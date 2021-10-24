@@ -41,25 +41,30 @@ let Assertion/show
           }
           assertion
 
+let ClassUnicode/show
+    : Regex.ClassUnicode -> Text
+    = -- TODO
+      \(x : Regex.ClassUnicode) -> merge {=} x : Text
+
+let ClassPerl/show
+    : Regex.ClassPerl -> Text
+    = \(x : Regex.ClassPerl) ->
+        if    x.negated
+        then  merge { Digit = "\\D", Space = "\\S", Word = "\\W" } x.kind
+        else  merge { Digit = "\\d", Space = "\\s", Word = "\\w" } x.kind
+
+let ClassBracketed/show
+    : Regex.ClassBracketed -> Text
+    = -- TODO
+      \(x : Regex.ClassBracketed) -> merge {=} x : Text
+
 let Class/show
     : Regex.Class -> Text
     = \(class : Regex.Class) ->
         merge
-          { Unicode =
-              -- TODO
-              \(x : Regex.ClassUnicode) -> merge {=} x : Text
-          , Perl =
-              \(x : Regex.ClassPerl) ->
-                if    x.negated
-                then  merge
-                        { Digit = "\\D", Space = "\\S", Word = "\\W" }
-                        x.kind
-                else  merge
-                        { Digit = "\\d", Space = "\\s", Word = "\\w" }
-                        x.kind
-          , Bracketed =
-              -- TODO
-              \(x : Regex.ClassBracketed) -> merge {=} x : Text
+          { Unicode = ClassUnicode/show
+          , Perl = ClassPerl/show
+          , Bracketed = ClassBracketed/show
           }
           class
 
