@@ -1,6 +1,5 @@
--- TODO
 let ClassBracketed
-    : Type
-    = <>
+    : Type -> Type
+    = \(ClassSet : Type) -> { kind : ClassSet, negated : Bool }
 
 in  ClassBracketed

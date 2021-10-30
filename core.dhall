@@ -1,6 +1,6 @@
 { Type =
     ./Type.dhall
-      sha256:334439f6154ad39c69e4161a595fcf3ad8757c67f63445455d9e6e67e79a9ca6
+      sha256:9918b75f0d25c33dfeae6983e4db668b548899cbd42d062297eeb5068647accb
 , Flag =
     ./Flag.dhall
       sha256:0264af3ae814901e53d13075789c1c6d745909e4701e17b898564a0e3e84439a
@@ -9,10 +9,19 @@
       sha256:843c329a28a72d2a5854051885a5d694a06cb151aff60c8e464e79fba15022a7
 , Class =
     ./ClassType.dhall
-      sha256:755ec5680e139a89af59658e28dada8455a2173c1992d5ccdbd972d2e3eb4274
+      sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
 , ClassBracketed =
     ./ClassBracketed.dhall
-      sha256:1b57497be16d9ad805d9bf729f3acd93371437bac63aeb41cf6cb0a318727035
+      sha256:c86e7dff4075f4346339e1c951bbf85dce42a0d5c08678c5b2e9e0a2723e07cc
+, ClassSet =
+    ./ClassSet/package.dhall
+      sha256:ba0a74e722579db1329f687b49b99556a92be3bed628a78696cc93850d976976
+, ClassAscii =
+    ./ClassAscii.dhall
+      sha256:7d838c80608b23035cc930255c97895ddc1f522f114a4e31bb4c47ce5ab076d9
+, ClassAsciiKind =
+    ./ClassAsciiKind.dhall
+      sha256:49363976be49b8cb540b7d08b770cbd42a977d65c6cd1136b6cc537185a476a3
 , ClassPerl =
     ./ClassPerl.dhall
       sha256:0af51f6bec641f3ecf5cf74b6feab9113a00c8ac9d35a4a78439a151f4a5d9c4
@@ -48,59 +57,59 @@
       sha256:efab2d6bd02158af1ee7ff6b1320e2387f3e876f8d5e3ee6e741f1292a4387fc
 , Visitor =
     ./Visitor.dhall
-      sha256:0b8e712a07af019150944db041a61a65d399f743c18e91491595d1d3bce3e06b
+      sha256:b5ab043896707928bc9caff0c95ec3788cfea564358f5251ac6f186a6d7085cc
 , empty =
     ./empty.dhall
-      sha256:ae9ceaae8abfc85771777ffb9430035283dc301060880459ef4e54152e9461a7
+      sha256:418410d0544c28232265cc6b24c0eb8f9be04625cc2193ea8facf61d62cfb291
 , flags =
     ./flags.dhall
-      sha256:c624f8a6aeb975a26ef30b1b9e4b0fe66bfda6ed5d339edabd7dbdadbe86638e
+      sha256:1460d483bd1393e8c398320602da66a34976c11a23a2a3cb1722ca851ce35b4b
 , literal =
     ./literal.dhall
-      sha256:eb9eee225ebd8aca117e8731044442f5d23d4b49c78ed0cbc4aa55a1a721276b
+      sha256:599e4665be8e49be9fd4039417583502d9550267b85bd8729b8a70176626b6ea
 , dot =
     ./dot.dhall
-      sha256:b21f82d6a6b1732c822a1b7fca3250ab9e9f980b9b1643a5a43dc6d7eb944317
+      sha256:47e78ed19bf1d5d8ff45b2a1cce30b8dcf4662979588d5d6f9c091cf2bee124d
 , assertion =
     ./assertion.dhall
-      sha256:c0f83d2c3c9bc68862471fbaa8881200667fd96be7b3f0a56f82e1a2bb7841d9
+      sha256:014d18df564df9433f7aed5e1e8f7004de4313c1296f9022ba92186720b430f3
 , class =
     ./class.dhall
-      sha256:cfb403662aca729d3decc5331e63c328cbcf0b12a4a4e6f444bcaa4d1cde142f
+      sha256:bfebf06f057c85412b9ad0a2d2752ce838fc9e718a571a44efed631c3e7cb662
 , repetition =
     ./repetition.dhall
-      sha256:cd2c2569d2a58d77cccaf192799d258199d505728dd34730e231c245497d2d85
+      sha256:e88282670fe7d36783975882d9083cc4dd25fe890e99bf366985b5c91c652338
 , optional =
     ./optional.dhall
-      sha256:9fde636064650ad040c866cf7a83d8f05358edbaa94e5a5a73fc29de334ef69d
+      sha256:39b32763591bac29736bc111b45569a813565706b916dc02074914901379efa1
 , multi =
     ./multi.dhall
-      sha256:92e6f1c75c4598802e354a7b84b0d27da5d3f40f00b5b426cd3760b8ab4799eb
+      sha256:8d351cfde1ba5f8ca69274420511b4424c67116de1c4880b5221176deafecbef
 , nonZero =
     ./nonZero.dhall
-      sha256:e6fa1de5400bd140e7ced993d486743b23ac893bd99d46738b865ab9675402c2
+      sha256:d82a2a5a8e14f70b423e2a1a7ddd877e191ad79ccf46fdefc52f2f2ee5134b75
 , exactly =
     ./exactly.dhall
-      sha256:633f7aeccd9f27045256e54d37d5ebd5462c9da8af82d5f5cd531ce6a62fa9b5
+      sha256:80235656f5ccc050a2863b3e00901f33c65a585c0e9dee3696032c75a311129f
 , atLeast =
     ./atLeast.dhall
-      sha256:83c7154b7f453134346f9e9c2fb49c04ef6b5316cde0db6a93c6fba191e35669
+      sha256:51f382348b5500c0074c6e16c505a89b11c43907e1af386c0418eef5280d1d91
 , bounded =
     ./bounded.dhall
-      sha256:b54759f13f0774acac3ec25dc7d2f7496a13abe5adea1256bed033ce96198f5d
+      sha256:c675cfc28929f5d7d7f9f36dce6aa3899e6f3b5a2ff7fbca501e7306ec249534
 , group =
     ./group.dhall
-      sha256:d02f93f5ce60e9a6527b6c920ef3648c3d107d042167b710683beea11b89b700
+      sha256:77b3574e344ff4c4fb10cf1e339ff92569eac62ca0b4b7aa3267d223ecd88a9c
 , capture =
     ./capture.dhall
-      sha256:16b51747625388b44c34ff32c535ab3a04504ba21b544b2b217afffdfb1bd440
+      sha256:439d6a1839168bac7723f3052104cb8e435d918439cafbb7885dcad6618b7ca1
 , captureAs =
     ./captureAs.dhall
-      sha256:25b817d20d9f6137f8c8a42acbdff08a10c9b5aa3181cba1ed108cf08d61d99b
+      sha256:177977b302302bdee7dfdd4d5601614c901c95e9ef904dbb5ca70a483d74e42e
 , alternation =
     ./alternation.dhall
-      sha256:f93d59bf8a29136103acf05e7048904088cea599067a42018ec9ae5d3fe5fddf
+      sha256:dbd711c7fdf025c721c6bc82b3a31c4bf6c8b5729c1e4718049c315120f43ea3
 , concat =
     ./concat.dhall
-      sha256:5269c80d31176608b1a06e8e2275e17978af6b12bd25f87075976410325fc0fb
+      sha256:8e310f300cc222ddc089de2d7ae97501b0f6da93199cc4858408911895b61e1e
 }

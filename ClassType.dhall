@@ -8,10 +8,17 @@ let ClassPerl =
 
 let ClassBracketed =
       ./ClassBracketed.dhall
-        sha256:1b57497be16d9ad805d9bf729f3acd93371437bac63aeb41cf6cb0a318727035
+        sha256:c86e7dff4075f4346339e1c951bbf85dce42a0d5c08678c5b2e9e0a2723e07cc
+
+let ClassSet =
+      ./ClassSet/Type.dhall
+        sha256:13becad51ab4cd5a2f3fc15882cb392a2cd9561e44f43fca944ce9cff063c0cd
 
 let Class
     : Type
-    = < Unicode : ClassUnicode | Perl : ClassPerl | Bracketed : ClassBracketed >
+    = < Unicode : ClassUnicode
+      | Perl : ClassPerl
+      | Bracketed : ClassBracketed ClassSet
+      >
 
 in  Class

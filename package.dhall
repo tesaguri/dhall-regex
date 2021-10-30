@@ -1,6 +1,6 @@
     { render =
         ./render.dhall
-          sha256:1db237da1025bb2ee57e55e899cc6df76fd86604373f571fa5f9b9b915d82ec0
+          sha256:c118539bc507d8d8c4132142ddb0a485cf6875105f2d3b05ba18c0fa8e8bedd9
     }
 //  ./core.dhall
-      sha256:ac81e4d617499836f8d03fdd917f74726b3b3851af1a967a1a1e79baa5198cf7
+      sha256:05406d966da8607d5ccca9e04d888d60baaed2c5633fb5269cecbc6c1a5cebd9

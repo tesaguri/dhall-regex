@@ -1,10 +1,10 @@
 let Regex =
       ./Type.dhall
-        sha256:334439f6154ad39c69e4161a595fcf3ad8757c67f63445455d9e6e67e79a9ca6
+        sha256:9918b75f0d25c33dfeae6983e4db668b548899cbd42d062297eeb5068647accb
 
 let Regex/repetition =
       ./repetition.dhall
-        sha256:cd2c2569d2a58d77cccaf192799d258199d505728dd34730e231c245497d2d85
+        sha256:e88282670fe7d36783975882d9083cc4dd25fe890e99bf366985b5c91c652338
 
 let RepetitionKind =
       ./RepetitionKind.dhall

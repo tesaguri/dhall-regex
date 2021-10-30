@@ -12,7 +12,7 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:ac81e4d617499836f8d03fdd917f74726b3b3851af1a967a1a1e79baa5198cf7
+        sha256:05406d966da8607d5ccca9e04d888d60baaed2c5633fb5269cecbc6c1a5cebd9
 
 let escape
     : Text -> Text
@@ -103,6 +103,31 @@ let ClassUnicode/show
 
         in  "\\${p}${body}"
 
+let ClassAscii/show =
+      \(x : Regex.ClassAscii) ->
+        let negation = if x.negated then "^" else ""
+
+        let name =
+              merge
+                { Alnum = "alnum"
+                , Alpha = "alpha"
+                , Ascii = "ascii"
+                , Blank = "blank"
+                , Cntrl = "cntrl"
+                , Digit = "digit"
+                , Graph = "graph"
+                , Lower = "lower"
+                , Print = "print"
+                , Punct = "punct"
+                , Space = "space"
+                , Upper = "upper"
+                , Word = "word"
+                , Xdigit = "xdigit"
+                }
+                x.kind
+
+        in  "[:${negation}${name}:]"
+
 let ClassPerl/show
     : Regex.ClassPerl -> Text
     = \(x : Regex.ClassPerl) ->
@@ -111,9 +136,45 @@ let ClassPerl/show
         else  merge { Digit = "\\d", Space = "\\s", Word = "\\w" } x.kind
 
 let ClassBracketed/show
-    : Regex.ClassBracketed -> Text
-    = -- TODO
-      \(x : Regex.ClassBracketed) -> merge {=} x : Text
+    : Regex.ClassBracketed Text -> Text
+    = \(x : Regex.ClassBracketed Text) ->
+        let negation = if x.negated then "^" else "" in "[${negation}${x.kind}]"
+
+let ClassSetBinaryOpKind/show
+    : Regex.ClassSet.BinaryOpKind -> Text
+    = \(x : Regex.ClassSet.BinaryOpKind) ->
+        merge
+          { Intersection = "&&", Difference = "--", SymmetricDifference = "~~" }
+          x
+
+let ClassSetBinaryOp/show
+    : { op : Regex.ClassSet.BinaryOpKind, lhs : Text, rhs : Text } -> Text
+    = \(x : { op : Regex.ClassSet.BinaryOpKind, lhs : Text, rhs : Text }) ->
+        "${x.lhs}${ClassSetBinaryOpKind/show x.op}${x.rhs}"
+
+let ClassSet/show
+    : Regex.ClassSet.Type -> Text
+    = \(x : Regex.ClassSet.Type) ->
+        x
+          Text
+          Text
+          { item = \(x : Text) -> x, binaryOp = ClassSetBinaryOp/show }
+          { empty = ""
+          , literal = escape
+          , range =
+              \(x : { start : Text, end : Text }) ->
+                "${escape x.start}-${escape x.end}"
+          , ascii = ClassAscii/show
+          , unicode = ClassUnicode/show
+          , perl = ClassPerl/show
+          , bracketed = ClassBracketed/show
+          , union = Text/concat
+          }
+
+let ClassBracketed/show
+    : Regex.ClassBracketed Regex.ClassSet.Type -> Text
+    = \(x : Regex.ClassBracketed Regex.ClassSet.Type) ->
+        ClassBracketed/show (x with kind = ClassSet/show x.kind)
 
 let Class/show
     : Regex.Class -> Text
@@ -197,5 +258,36 @@ let example2 =
               ]
 
       in  assert : render ast === "(?:foo|bar)(?:baz)?"
+
+let example3 =
+      let lhs =
+            Regex.ClassSet.item
+              ( Regex.ClassSet.Item.unicode
+                  { negated = False
+                  , kind =
+                      Regex.ClassUnicodeKind.OneLetter
+                        Regex.ClassUnicodeOneLetter.Letter
+                  }
+              )
+
+      let rhs =
+            Regex.ClassSet.item
+              ( Regex.ClassSet.Item.ascii
+                  { negated = False, kind = Regex.ClassAsciiKind.Alnum }
+              )
+
+      let ast =
+            Regex.class
+              ( Regex.Class.Bracketed
+                  { negated = False
+                  , kind =
+                      Regex.ClassSet.binaryOp
+                        lhs
+                        Regex.ClassSet.BinaryOpKind.Difference
+                        rhs
+                  }
+              )
+
+      in  assert : render ast === "[\\pL--[:alnum:]]"
 
 in  render
