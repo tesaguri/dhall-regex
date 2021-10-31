@@ -12,7 +12,15 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:eb196b4de7615d53874703f9d7dbe446f5f50136db2317f9039a338e735dd076
+        sha256:68823a5cef752fa2d53f60e0a1c456ee92afe1c9dc5d0a625a3ecb534d69fbb8
+
+let ClassBracketed =
+      ./Class/Bracketed/MakeType.dhall
+        sha256:c86e7dff4075f4346339e1c951bbf85dce42a0d5c08678c5b2e9e0a2723e07cc
+
+let Repetition =
+      ./Repetition/MakeType.dhall
+        sha256:c0f41cb47504d6d5fb9f34d93a9c731f3c08e3efc704867af30f9155c7942a24
 
 let escape
     : Text -> Text
@@ -136,8 +144,8 @@ let ClassPerl/show
         else  merge { Digit = "\\d", Space = "\\s", Word = "\\w" } x.kind
 
 let ClassBracketed/show
-    : Regex.Class.Bracketed.Type Text -> Text
-    = \(x : Regex.Class.Bracketed.Type Text) ->
+    : ClassBracketed Text -> Text
+    = \(x : ClassBracketed Text) ->
         let negation = if x.negated then "^" else "" in "[${negation}${x.kind}]"
 
 let ClassSetBinaryOpKind/show
@@ -172,8 +180,8 @@ let ClassSet/show
           }
 
 let ClassBracketed/show
-    : Regex.Class.Bracketed.Type Regex.Class.Set.Type -> Text
-    = \(x : Regex.Class.Bracketed.Type Regex.Class.Set.Type) ->
+    : ClassBracketed Regex.Class.Set.Type -> Text
+    = \(x : ClassBracketed Regex.Class.Set.Type) ->
         ClassBracketed/show (x with kind = ClassSet/show x.kind)
 
 let Class/show
@@ -227,7 +235,7 @@ let render
           , assertion = Assertion/show
           , class = Class/show
           , repetition =
-              \(x : Regex.Repetition.Type Text) ->
+              \(x : Repetition Text) ->
                 let greediness = if x.greedy then "" else "?"
 
                 in  "${x.expr}${RepetitionKind/show x.kind}${greediness}"
@@ -263,24 +271,16 @@ let example2 =
 let example3 =
       let lhs =
             Regex.Class.Set.item
-              ( Regex.Class.Set.Item.unicode
-                  { negated = False
-                  , kind =
-                      Regex.Class.Unicode.Kind.OneLetter
-                        Regex.Class.Unicode.OneLetter.Letter
-                  }
-              )
+              (Regex.Class.Set.Item.unicode Regex.Class.Unicode.letter)
 
       let rhs =
             Regex.Class.Set.item
-              ( Regex.Class.Set.Item.ascii
-                  { negated = False, kind = Regex.Class.Ascii.Kind.Alnum }
-              )
+              (Regex.Class.Set.Item.ascii Regex.Class.Ascii.alnum)
 
       let ast =
             Regex.class
               ( Regex.Class.Type.Bracketed
-                  { negated = False
+                  Regex.Class.Bracketed::{
                   , kind =
                       Regex.Class.Set.binaryOp
                         lhs

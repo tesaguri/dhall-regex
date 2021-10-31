@@ -16,11 +16,11 @@ let GroupKind =
 
 let Repetition =
       ./Repetition/Type.dhall
-        sha256:c0f41cb47504d6d5fb9f34d93a9c731f3c08e3efc704867af30f9155c7942a24
+        sha256:3567e107cb4541d55dc3b839faf28ec4735dc6bfd9a019eaa0229498a584d482
 
 let repetition
-    : Repetition Regex -> Regex
-    = \(x : Repetition Regex) ->
+    : Repetition -> Regex
+    = \(x : Repetition) ->
       \(Regex : Type) ->
       \(visitor : Visitor Regex) ->
         let expr =

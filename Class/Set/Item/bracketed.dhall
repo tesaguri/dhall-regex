@@ -1,6 +1,6 @@
 let Bracketed =
       ../../Bracketed/Type.dhall
-        sha256:c86e7dff4075f4346339e1c951bbf85dce42a0d5c08678c5b2e9e0a2723e07cc
+        sha256:3f2e1110d512712d68ca052fc0b5cbf28bbf4bbca154cffecf972ddaca3f1040
 
 let Item =
       ./Type.dhall
@@ -10,17 +10,13 @@ let Visitor =
       ./Visitor.dhall
         sha256:02fdd689d3f2fabcc0a61c31bf256d3d23c744abacea562b7f42822562a02bb0
 
-let Set =
-      ../Type.dhall
-        sha256:13becad51ab4cd5a2f3fc15882cb392a2cd9561e44f43fca944ce9cff063c0cd
-
 let SetVisitor =
       ../Visitor.dhall
         sha256:cf774f0c533d6af1263c8eba37b959ad0563923ce138fb418027ce066c5dc082
 
 let bracketed
-    : Bracketed Set -> Item
-    = \(x : Bracketed Set) ->
+    : Bracketed -> Item
+    = \(x : Bracketed) ->
       \(Set : Type) ->
       \(Item : Type) ->
       \(set : SetVisitor Set Item) ->

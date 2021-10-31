@@ -9,10 +9,10 @@
       sha256:843c329a28a72d2a5854051885a5d694a06cb151aff60c8e464e79fba15022a7
 , Class =
     ./Class/package.dhall
-      sha256:dfb8bdb0809a956270da903ed81c50bae7044b2bad99ab1350389ff9d87d2d55
+      sha256:12504b3bb02e6fc847a2b3dfb82dcadd42fab840f1b0584d0f331c24e6141b4f
 , Repetition =
     ./Repetition/package.dhall
-      sha256:c32c1fadf55733a58fafdf7cb3228fea4120d962d796c8d9cffa2a206bb3fc15
+      sha256:b7c4da38f7e0f5b360d6d437aeba025a5b7d415e38e0d128f523c391fefd7e3b
 , Group =
     ./Group/package.dhall
       sha256:13186df27f014eced0476e26776c11af5e6449a1d93ffec6d03dd2f0d8ef22d6

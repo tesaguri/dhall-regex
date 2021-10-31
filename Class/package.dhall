@@ -3,17 +3,17 @@
       sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
 , Unicode =
     ./Unicode/package.dhall
-      sha256:00c67db3b889dc0587bafe938375c00c7ff889ceaad9e927ecedab7c3fd36165
+      sha256:5e532d7d9b8282e348ddabb6d21bd791ec9af6107d661a014b79d6c19903aa54
 , Ascii =
     ./Ascii/package.dhall
-      sha256:474ed2b90ccf186d4cd7dfade13fe1335629fcea3a4ad464d2febe9c2137aa52
+      sha256:f7d641340799b9d095934647ba331038796853b4e2949ab60317aed9e355ed7f
 , Perl =
     ./Perl/package.dhall
-      sha256:333f6af7571f2a11c3c8e9015a6305bbd2e35ce852d67ebd46ad202c67a3dece
+      sha256:3b0cf7659108d982357987a7420ec54ded48e565e54dbd440848c5fcc8e73350
 , Set =
     ./Set/package.dhall
       sha256:ba0a74e722579db1329f687b49b99556a92be3bed628a78696cc93850d976976
 , Bracketed =
     ./Bracketed/package.dhall
-      sha256:9651447e70144fb6271144264c08abd1c86182956e1a2ad89f3df3407daecfe8
+      sha256:f87c8687e49f854ca275eaf570359cc6e9ebb86c53e0dbb1c235da5ef383e02b
 }

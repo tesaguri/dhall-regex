@@ -11,7 +11,7 @@ let Class =
         sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
 
 let Repetition =
-      ./Repetition/Type.dhall
+      ./Repetition/MakeType.dhall
         sha256:c0f41cb47504d6d5fb9f34d93a9c731f3c08e3efc704867af30f9155c7942a24
 
 let Group =
