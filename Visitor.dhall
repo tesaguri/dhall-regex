@@ -7,15 +7,15 @@ let Assertion =
         sha256:843c329a28a72d2a5854051885a5d694a06cb151aff60c8e464e79fba15022a7
 
 let Class =
-      ./ClassType.dhall
+      ./Class/Type.dhall
         sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
 
 let Repetition =
-      ./RepetitionType.dhall
+      ./Repetition/Type.dhall
         sha256:c0f41cb47504d6d5fb9f34d93a9c731f3c08e3efc704867af30f9155c7942a24
 
 let Group =
-      ./GroupType.dhall
+      ./Group/Type.dhall
         sha256:0f262c2f20c4398ca7225db3c8571135e37cfce10b1a7f74f66977f8e28ea644
 
 let Visitor

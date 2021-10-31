@@ -7,7 +7,7 @@ let Visitor =
         sha256:b5ab043896707928bc9caff0c95ec3788cfea564358f5251ac6f186a6d7085cc
 
 let Class =
-      ./ClassType.dhall
+      ./Class/Type.dhall
         sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
 
 let class

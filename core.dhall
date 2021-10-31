@@ -8,53 +8,14 @@
     ./AssertionType.dhall
       sha256:843c329a28a72d2a5854051885a5d694a06cb151aff60c8e464e79fba15022a7
 , Class =
-    ./ClassType.dhall
-      sha256:a33699ae63659a01593395cc1589d434e964d5ae92d4aeda7c67b4535b7e61b9
-, ClassBracketed =
-    ./ClassBracketed.dhall
-      sha256:c86e7dff4075f4346339e1c951bbf85dce42a0d5c08678c5b2e9e0a2723e07cc
-, ClassSet =
-    ./ClassSet/package.dhall
-      sha256:ba0a74e722579db1329f687b49b99556a92be3bed628a78696cc93850d976976
-, ClassAscii =
-    ./ClassAscii.dhall
-      sha256:7d838c80608b23035cc930255c97895ddc1f522f114a4e31bb4c47ce5ab076d9
-, ClassAsciiKind =
-    ./ClassAsciiKind.dhall
-      sha256:49363976be49b8cb540b7d08b770cbd42a977d65c6cd1136b6cc537185a476a3
-, ClassPerl =
-    ./ClassPerl.dhall
-      sha256:0af51f6bec641f3ecf5cf74b6feab9113a00c8ac9d35a4a78439a151f4a5d9c4
-, ClassPerlKind =
-    ./ClassPerlKind.dhall
-      sha256:27d090eb9028e1b99cada2c6514a25563df7f7af110b53fe5b44cddef2aed2ce
-, ClassUnicode =
-    ./ClassUnicode.dhall
-      sha256:d57d7ce4c955bf8c6f52a917d95587b607489d3380b7717293215c9d51b3c3bc
-, ClassUnicodeKind =
-    ./ClassUnicodeKind.dhall
-      sha256:3e5e3dbdfe5c93b8f5d40df8df3717d5facb4af00ed2f70ff7a98f8669ac9405
-, ClassUnicodeOneLetter =
-    ./ClassUnicodeOneLetter.dhall
-      sha256:7a48c5fb27a0452e7ce73e356ae6dd52f3ce3e36072e6edfbff602411c0bfe3a
-, ClassUnicodeNamedValue =
-    ./ClassUnicodeNamedValue.dhall
-      sha256:3e175410fd79df4a838b49415cf4290f6c46cf7890820539cc116d9822684864
-, ClassUnicodeOpKind =
-    ./ClassUnicodeOpKind.dhall
-      sha256:4cc6c72c660890aacec3c2369b3046e757e73e12f7d0f88fadd46885c1d6049f
+    ./Class/package.dhall
+      sha256:dfb8bdb0809a956270da903ed81c50bae7044b2bad99ab1350389ff9d87d2d55
 , Repetition =
-    ./RepetitionType.dhall
-      sha256:c0f41cb47504d6d5fb9f34d93a9c731f3c08e3efc704867af30f9155c7942a24
-, RepetitionKind =
-    ./RepetitionKind.dhall
-      sha256:29fbd6d7c43327c0c95f42751b376c92ff93185c599ab7a278b6478f5c46e580
+    ./Repetition/package.dhall
+      sha256:c32c1fadf55733a58fafdf7cb3228fea4120d962d796c8d9cffa2a206bb3fc15
 , Group =
-    ./GroupType.dhall
-      sha256:0f262c2f20c4398ca7225db3c8571135e37cfce10b1a7f74f66977f8e28ea644
-, GroupKind =
-    ./GroupKind.dhall
-      sha256:efab2d6bd02158af1ee7ff6b1320e2387f3e876f8d5e3ee6e741f1292a4387fc
+    ./Group/package.dhall
+      sha256:13186df27f014eced0476e26776c11af5e6449a1d93ffec6d03dd2f0d8ef22d6
 , Visitor =
     ./Visitor.dhall
       sha256:b5ab043896707928bc9caff0c95ec3788cfea564358f5251ac6f186a6d7085cc

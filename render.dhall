@@ -12,7 +12,7 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:05406d966da8607d5ccca9e04d888d60baaed2c5633fb5269cecbc6c1a5cebd9
+        sha256:eb196b4de7615d53874703f9d7dbe446f5f50136db2317f9039a338e735dd076
 
 let escape
     : Text -> Text
@@ -71,14 +71,14 @@ let Assertion/show
           assertion
 
 let ClassUnicode/show
-    : Regex.ClassUnicode -> Text
-    = \(x : Regex.ClassUnicode) ->
+    : Regex.Class.Unicode.Type -> Text
+    = \(x : Regex.Class.Unicode.Type) ->
         let p = if x.negated then "P" else "p"
 
         let body =
               merge
                 { OneLetter =
-                    \(x : Regex.ClassUnicodeOneLetter) ->
+                    \(x : Regex.Class.Unicode.OneLetter) ->
                       merge
                         { Letter = "L"
                         , Punctuation = "P"
@@ -91,7 +91,7 @@ let ClassUnicode/show
                         x
                 , Named = \(x : Text) -> "{${escape x}}"
                 , NamedValue =
-                    \(x : Regex.ClassUnicodeNamedValue) ->
+                    \(x : Regex.Class.Unicode.NamedValue) ->
                       let op =
                             merge
                               { Equal = "=", Colon = ":", NotEqual = "!=" }
@@ -104,7 +104,7 @@ let ClassUnicode/show
         in  "\\${p}${body}"
 
 let ClassAscii/show =
-      \(x : Regex.ClassAscii) ->
+      \(x : Regex.Class.Ascii.Type) ->
         let negation = if x.negated then "^" else ""
 
         let name =
@@ -129,32 +129,32 @@ let ClassAscii/show =
         in  "[:${negation}${name}:]"
 
 let ClassPerl/show
-    : Regex.ClassPerl -> Text
-    = \(x : Regex.ClassPerl) ->
+    : Regex.Class.Perl.Type -> Text
+    = \(x : Regex.Class.Perl.Type) ->
         if    x.negated
         then  merge { Digit = "\\D", Space = "\\S", Word = "\\W" } x.kind
         else  merge { Digit = "\\d", Space = "\\s", Word = "\\w" } x.kind
 
 let ClassBracketed/show
-    : Regex.ClassBracketed Text -> Text
-    = \(x : Regex.ClassBracketed Text) ->
+    : Regex.Class.Bracketed.Type Text -> Text
+    = \(x : Regex.Class.Bracketed.Type Text) ->
         let negation = if x.negated then "^" else "" in "[${negation}${x.kind}]"
 
 let ClassSetBinaryOpKind/show
-    : Regex.ClassSet.BinaryOpKind -> Text
-    = \(x : Regex.ClassSet.BinaryOpKind) ->
+    : Regex.Class.Set.BinaryOpKind -> Text
+    = \(x : Regex.Class.Set.BinaryOpKind) ->
         merge
           { Intersection = "&&", Difference = "--", SymmetricDifference = "~~" }
           x
 
 let ClassSetBinaryOp/show
-    : { op : Regex.ClassSet.BinaryOpKind, lhs : Text, rhs : Text } -> Text
-    = \(x : { op : Regex.ClassSet.BinaryOpKind, lhs : Text, rhs : Text }) ->
+    : { op : Regex.Class.Set.BinaryOpKind, lhs : Text, rhs : Text } -> Text
+    = \(x : { op : Regex.Class.Set.BinaryOpKind, lhs : Text, rhs : Text }) ->
         "${x.lhs}${ClassSetBinaryOpKind/show x.op}${x.rhs}"
 
 let ClassSet/show
-    : Regex.ClassSet.Type -> Text
-    = \(x : Regex.ClassSet.Type) ->
+    : Regex.Class.Set.Type -> Text
+    = \(x : Regex.Class.Set.Type) ->
         x
           Text
           Text
@@ -172,13 +172,13 @@ let ClassSet/show
           }
 
 let ClassBracketed/show
-    : Regex.ClassBracketed Regex.ClassSet.Type -> Text
-    = \(x : Regex.ClassBracketed Regex.ClassSet.Type) ->
+    : Regex.Class.Bracketed.Type Regex.Class.Set.Type -> Text
+    = \(x : Regex.Class.Bracketed.Type Regex.Class.Set.Type) ->
         ClassBracketed/show (x with kind = ClassSet/show x.kind)
 
 let Class/show
-    : Regex.Class -> Text
-    = \(class : Regex.Class) ->
+    : Regex.Class.Type -> Text
+    = \(class : Regex.Class.Type) ->
         merge
           { Unicode = ClassUnicode/show
           , Perl = ClassPerl/show
@@ -187,8 +187,8 @@ let Class/show
           class
 
 let RepetitionKind/show
-    : Regex.RepetitionKind -> Text
-    = \(kind : Regex.RepetitionKind) ->
+    : Regex.Repetition.Kind -> Text
+    = \(kind : Regex.Repetition.Kind) ->
         merge
           { ZeroOrOne = "?"
           , ZeroOrMore = "*"
@@ -202,8 +202,8 @@ let RepetitionKind/show
           kind
 
 let GroupKind/show
-    : Regex.GroupKind -> Text
-    = \(kind : Regex.GroupKind) ->
+    : Regex.Group.Kind -> Text
+    = \(kind : Regex.Group.Kind) ->
         merge
           { CaptureIndex = ""
           , CaptureName = \(name : Text) -> "?P<${name}>"
@@ -227,12 +227,13 @@ let render
           , assertion = Assertion/show
           , class = Class/show
           , repetition =
-              \(x : Regex.Repetition Text) ->
+              \(x : Regex.Repetition.Type Text) ->
                 let greediness = if x.greedy then "" else "?"
 
                 in  "${x.expr}${RepetitionKind/show x.kind}${greediness}"
           , group =
-              \(x : Regex.Group Text) -> "(${GroupKind/show x.kind}${x.expr})"
+              \(x : Regex.Group.Type Text) ->
+                "(${GroupKind/show x.kind}${x.expr})"
           , alternation = Text/concatSep "|"
           , concat = Text/concat
           }
@@ -261,29 +262,29 @@ let example2 =
 
 let example3 =
       let lhs =
-            Regex.ClassSet.item
-              ( Regex.ClassSet.Item.unicode
+            Regex.Class.Set.item
+              ( Regex.Class.Set.Item.unicode
                   { negated = False
                   , kind =
-                      Regex.ClassUnicodeKind.OneLetter
-                        Regex.ClassUnicodeOneLetter.Letter
+                      Regex.Class.Unicode.Kind.OneLetter
+                        Regex.Class.Unicode.OneLetter.Letter
                   }
               )
 
       let rhs =
-            Regex.ClassSet.item
-              ( Regex.ClassSet.Item.ascii
-                  { negated = False, kind = Regex.ClassAsciiKind.Alnum }
+            Regex.Class.Set.item
+              ( Regex.Class.Set.Item.ascii
+                  { negated = False, kind = Regex.Class.Ascii.Kind.Alnum }
               )
 
       let ast =
             Regex.class
-              ( Regex.Class.Bracketed
+              ( Regex.Class.Type.Bracketed
                   { negated = False
                   , kind =
-                      Regex.ClassSet.binaryOp
+                      Regex.Class.Set.binaryOp
                         lhs
-                        Regex.ClassSet.BinaryOpKind.Difference
+                        Regex.Class.Set.BinaryOpKind.Difference
                         rhs
                   }
               )

@@ -7,7 +7,7 @@ let Visitor =
         sha256:b5ab043896707928bc9caff0c95ec3788cfea564358f5251ac6f186a6d7085cc
 
 let GroupKind =
-      ./GroupKind.dhall
+      ./Group/Kind.dhall
         sha256:efab2d6bd02158af1ee7ff6b1320e2387f3e876f8d5e3ee6e741f1292a4387fc
 
 let captureAs
