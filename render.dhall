@@ -12,7 +12,7 @@ let Text/concat =
 
 let Regex =
       ./core.dhall
-        sha256:68823a5cef752fa2d53f60e0a1c456ee92afe1c9dc5d0a625a3ecb534d69fbb8
+        sha256:45446d6f979e62a0e7341167370751e13b24e021ebd32a1a8920a724b9b8376e
 
 let ClassBracketed =
       ./Class/Bracketed/MakeType.dhall
@@ -269,8 +269,7 @@ let example2 =
                   ]
               )
 
-      in    assert
-          : render ast === "(?:(?:(?:(?:foo)|(?:bar)))(?:(?:(?:baz)))*?)?"
+      in  assert : render ast === "(?:(?:foo|bar)(?:baz)*?)?"
 
 let example3 =
       let lhs =
