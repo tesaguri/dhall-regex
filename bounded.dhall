@@ -4,7 +4,7 @@ let Regex =
 
 let Regex/repetition =
       ./repetition.dhall
-        sha256:87374bc80158a972a4cbe504a98f96247ea1534e4031a41d1a7d6cbc38df940f
+        sha256:b1af9424c92aeeb2f296ff162264ee195e4982b243e6fe79e041a47a7ab19fd1
 
 let RepetitionKind =
       ./Repetition/Kind.dhall

@@ -48,7 +48,18 @@ let repetition
                 , dot = x.expr
                 , assertion = \(_ : Assertion) -> x.expr
                 , class = \(_ : Class) -> x.expr
-                , repetition = \(_ : Repetition) -> x.expr
+                , repetition =
+                    \(_ : Repetition) ->
+                      merge
+                        { ZeroOrOne = grouped
+                        , ZeroOrMore = x.expr
+                        , OneOrMore = x.expr
+                        , Exactly = \(_ : Natural) -> x.expr
+                        , AtLeast = \(_ : Natural) -> x.expr
+                        , Bounded =
+                            \(_ : { start : Natural, end : Natural }) -> x.expr
+                        }
+                        x.kind
                 , group = \(_ : Group.Type Regex) -> x.expr
                 , alternation = \(_ : List Regex) -> grouped
                 , concat = \(_ : List Regex) -> grouped
