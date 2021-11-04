@@ -261,12 +261,16 @@ let example2 =
     -- The `Regex.concat` and `Regex.repetition` constructors insert non-capturing groups
     -- when operator precedence is ambiguous.
       let ast =
-            Regex.concat
-              [ Regex.alternation [ Regex.literal "foo", Regex.literal "bar" ]
-              , Regex.optional (Regex.literal "baz")
-              ]
+            Regex.optional
+              ( Regex.concat
+                  [ Regex.alternation
+                      [ Regex.literal "foo", Regex.literal "bar" ]
+                  , Regex.optional (Regex.multi (Regex.literal "baz"))
+                  ]
+              )
 
-      in  assert : render ast === "(?:foo|bar)(?:baz)?"
+      in    assert
+          : render ast === "(?:(?:(?:(?:foo)|(?:bar)))(?:(?:(?:baz)))*?)?"
 
 let example3 =
       let lhs =
